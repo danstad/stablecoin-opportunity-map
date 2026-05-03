@@ -1,0 +1,69 @@
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+\label{sec:exec_summary}
+
+\begin{spacing}{1.05}
+
+\noindent\textbf{Why this matters.} Cross-border payments depend on banks talking to other banks through a network called \emph{correspondent banking}. Over the last decade, banks have been quietly walking away from each other---closing accounts, dropping relationships, refusing to clear payments through certain country pairs. Regulators call this \emph{de-risking}.
+
+\smallskip
+
+\noindent Not all trade is hit equally. Simple commodities can be paid for with cash, prepayment, or a single bank transfer. Complex products---semiconductors, pharmaceuticals, machinery---are different. They typically need a chain of trust: letters of credit, several banks acting in sequence, foreign-exchange settlement, extended payment terms. When the chain breaks, the kinds of trade that depend most on the chain are the kinds that get cut first. Stablecoins---dollar-denominated digital tokens that move on blockchain networks---bypass the bank-to-bank chain entirely. The question is simple: \emph{where would they help most?}
+
+\smallskip
+
+\noindent\textbf{The intuition.} If payment-network problems hit complex trade harder than simple trade, the data should show a clean signature: where countries face \emph{more} payment friction, complex-goods exports should fall faster than simple-goods exports; where they face \emph{less} friction, the reverse. We use three real-world events that pushed payment frictions in opposite directions:
+\begin{itemize}[leftmargin=*, itemsep=0pt, topsep=2pt]
+\item \textbf{FATF greylisting} (\emph{friction up}). The global anti-money-laundering body publishes a watch list. Once listed, banks abroad become more cautious about clearing the country's payments.
+\item \textbf{EU AMLD harmonization} (\emph{friction down}). EU members adopted common AML rules in 2017. Within EU corridors, banks became more confident, not less.
+\item \textbf{FDI-derisked corridors} (\emph{friction up}). When bilateral foreign-direct-investment positions collapse, the underlying financial relationship has typically broken. We mark a corridor de-risked if FDI fell more than 50\% from its 2015--2017 average.
+\end{itemize}
+
+\noindent A spurious channel---a generic ``advanced economies do better'' story---cannot produce \emph{opposite} signs on \emph{opposite-direction} shocks. The fact that AMLD pulls one way while FATF and FDI pull the other way is the cleanest causal-mechanism evidence available in this setting.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  node distance=0.5cm,
+  shockup/.style={rectangle, draw, rounded corners=2pt, fill=red!8, minimum width=5cm, minimum height=0.8cm, align=center, font=\footnotesize, inner sep=3pt},
+  shockdn/.style={rectangle, draw, rounded corners=2pt, fill=green!10, minimum width=5cm, minimum height=0.8cm, align=center, font=\footnotesize, inner sep=3pt},
+  mech/.style={rectangle, draw, fill=gray!12, minimum width=12cm, minimum height=0.7cm, align=center, font=\footnotesize, inner sep=3pt},
+  output/.style={rectangle, draw, fill=blue!8, minimum width=12cm, minimum height=0.7cm, align=center, font=\footnotesize, inner sep=3pt},
+  policy/.style={rectangle, draw, fill=green!12, minimum width=12cm, minimum height=0.7cm, align=center, font=\footnotesize, inner sep=3pt},
+  arr/.style={-{Latex[length=2mm]}, thick}
+]
+\node[shockup] (up) {\textbf{Friction up}: FATF greylist; FDI corridor drop};
+\node[shockdn, right=1cm of up] (down) {\textbf{Friction down}: EU AMLD harmonization (2017)};
+\node[mech, below=1.4cm of $(up)!0.5!(down)$] (mech) {Differential effect on complex-product trade};
+\node[output, below=0.35cm of mech] (sos) {Country-level Stablecoin Opportunity Score};
+\node[policy, below=0.35cm of sos] (filter) {Feasibility filter (capital openness $\times$ infrastructure) $\Rightarrow$ 60 actionable countries};
+\draw[arr] (up.south) -- node[left, font=\footnotesize, pos=0.5] {$\gamma<0$} (mech.north -| up.south);
+\draw[arr] (down.south) -- node[right, font=\footnotesize, pos=0.5] {$\gamma>0$} (mech.north -| down.south);
+\draw[arr] (mech) -- (sos);
+\draw[arr] (sos) -- (filter);
+\end{tikzpicture}
+\end{figure}
+
+\noindent\textbf{What we find.} On a panel of 226 countries, 94 product categories, and 2018--2023 (2.82 million observations), the three signs go the right way. Per standard deviation of product complexity: FATF greylisting reduces trade flow by 11--30\%; EU AMLD raises it by 10--15\% in EU corridors after 2017; FDI de-risking reduces it by 21--37\%. The pattern survives ten different ways of slicing the data, three different fixed-effect structures, and a battery of placebo tests using gravity variables (distance, language, regional-trade-agreement coverage) in place of the friction shocks: those placebos do not load, the friction shocks do.
+
+\smallskip
+
+\noindent\textbf{What it is good for.} The estimated effects aggregate into a country-level \emph{Stablecoin Opportunity Score}---a ranking of where alternative payment infrastructure would unlock the most economically valuable trade. The composite top five are \textbf{Haiti, Fiji, Syria, Lebanon, and Nicaragua}: small economies with high friction exposure and limited regulatory alternatives. A second filter looks at where stablecoins could plausibly deploy today (capital-account openness $\times$ infrastructure readiness); within those 60 ``actionable now'' jurisdictions the top ten by SOS are \textbf{Panama, Trinidad and Tobago, the United Arab Emirates, Bahrain, Georgia, San Marino, Uruguay, Oman, Armenia, and Kuwait}.
+
+\smallskip
+
+\noindent\textbf{What this analysis is---and isn't.} This is a \emph{preliminary analysis using publicly available data}. Trade flows from BACI; complexity from the Harvard Growth Lab; de-risking from IMF bilateral FDI and the FATF greylist; AMLD timing from public EU sources. Three limitations follow:
+
+\begin{enumerate}[leftmargin=*, itemsep=0pt, topsep=2pt]
+\item \textbf{Direct correspondent-banking data, ideally from BIS or SWIFT, would sharpen the test.} Our FDI-based de-risking measure is a coarse stand-in for actual bank-to-bank account closures.
+\item \textbf{Higher computing power would let us run the full panel rather than subsamples on the heaviest specifications.} The full bilateral panel has roughly 33 million observations and does not fit in 16 GB of memory under the four-fixed-effect Poisson estimator we use for robustness; we use a stratified 3,000-pair subsample for those specifications.
+\item \textbf{The Chainalysis Global Crypto Adoption Index would replace the GDP-per-capita placeholder we use as the second axis of the feasibility filter}---a behavioral measure of where stablecoin infrastructure already exists, rather than a developmental proxy.
+\end{enumerate}
+
+\smallskip
+
+\noindent What this analysis \emph{can} show with public data is the direction and order of magnitude of where stablecoins would help most and where they would help least. It \emph{cannot} say exactly which corridors will respond first, or how fast adoption would translate into trade. Those questions need private data and longer time series; the body of the paper lists them as natural extensions.
+
+\end{spacing}
+
+\newpage

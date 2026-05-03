@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-04-03 17:37:32",
+  "baci_version": "V202601",
+  "hs_revision": "HS12",
+  "sample_years": [
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "baci_hs4_rows": 46036716,
+  "panel_skeleton_rows": "SKIPPED (too large)",
+  "n_exporters": 226,
+  "n_importers": 226,
+  "n_products_hs4": 1211,
+  "n_years": 10,
+  "n_active_pairs": 35444,
+  "zero_share": null,
+  "world_trade_by_year": {
+    "2015": 16193.53,
+    "2016": 15776.6,
+    "2017": 17485.05,
+    "2018": 19142.05,
+    "2019": 18618.94,
+    "2020": 17198.52,
+    "2021": 21534.68,
+    "2022": 24214.79,
+    "2023": 22969.8,
+    "2024": 22829.36
+  },
+  "excluded_hs_chapters": [
+    "93",
+    "97",
+    "98",
+    "99"
+  ],
+  "min_years_active": 3
+}

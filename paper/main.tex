@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+\input{preambles/preamble}
+
+\title{The Stablecoin Opportunity Map:\\ Economic Complexity Meets Payment Innovation\thanks{The full research workflow for this paper---data scraping and acquisition, cleaning, estimation, robustness analysis, figure and table production, and editorial drafting---was conducted using Claude Code (Anthropic). All quantitative results, narrative claims, and policy interpretations have been reviewed and validated by the authors. Public data sources are documented in Section~\ref{sec:data}; replication code is available on request.}}
+
+\author{Daniel Prudencio\thanks{Independent researcher. Email: \href{mailto:prudencio.da@gmail.com}{prudencio.da@gmail.com}. Corresponding author.}}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent \singlespacing
+Payment-friction shocks affect trade in complex products symmetrically: friction increases reduce complex trade and friction reductions raise it. Using PPML gravity estimation on bilateral trade among 226 countries across 94 HS2 product categories (2015--2023), we identify the channel through three reduced-form natural experiments. FATF greylisting reduces complex-product trade differentially ($\hat{\gamma}_{\text{FATF}} = -0.108$, $p = 0.098$), EU AMLD harmonization raises it ($\hat{\gamma}_{\text{AMLD}} = +0.141$, $p = 0.040$), and FDI-derisked corridors reduce it ($\hat{\gamma}_{\text{FDI}} = -0.135$, $p = 0.043$), each in a panel pair-fixed-effects specification on 2.82 million observations. The triple horse race preserves all three signs; diplomatic disagreement enters with a positive sign in yearly kitchen-sink cross-sections (null in the panel kitchen-sink) and does not explain the complexity penalty. We construct a composite Stablecoin Opportunity Score that aggregates the FATF and FDI channels and down-weights EU-AMLD corridors, where regulatory harmonization is a partial substitute for stablecoin payment rails. The composite top five are Haiti, Fiji, Syria, Lebanon, and Nicaragua. Sixty countries fall in the actionable feasibility quadrant; the top ten by SOS within that quadrant are Panama, Trinidad and Tobago, the United Arab Emirates, Bahrain, Georgia, San Marino, Uruguay, Oman, Armenia, and Kuwait.
+\end{abstract}
+
+\vspace{1em}
+\noindent \textbf{JEL Codes:} F14, F36, G23, O33
+
+\vspace{0.5em}
+\noindent \textbf{Keywords:} stablecoins, economic complexity, trade costs, payment infrastructure, de-risking, gravity model
+
+\newpage
+\setcounter{page}{1}
+
+\input{sections/00_executive_summary}
+
+\input{sections/01_introduction}
+\input{sections/02_literature}
+\input{sections/03_data}
+\input{sections/04_empirical_strategy}
+\input{sections/05_results}
+\input{sections/06_robustness}
+\input{sections/07_stablecoin_opportunity}
+\input{sections/08_conclusion}
+
+\newpage
+\singlespacing
+\bibliographystyle{aer}
+\bibliography{../Bibliography_base}
+
+\newpage
+\doublespacing
+\appendix
+\input{sections/09_appendix}
+
+\end{document}

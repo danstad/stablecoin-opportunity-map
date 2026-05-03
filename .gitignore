@@ -1,0 +1,94 @@
+# ==============================================================================
+# .gitignore for Academic Claude Code Projects
+# ==============================================================================
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+*.run.xml
+*-blx.bib
+
+# Compiled PDFs (uncomment to track specific PDFs)
+# *.pdf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Rdata
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code local files (not shared across machines)
+.claude/settings.local.json
+.claude/state/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Quarto rendering artifacts
+/.quarto/
+
+# docs/ is intentionally tracked — it is the GitHub Pages source for the
+# static site (built by `quarto render site/`).
+
+# Python virtual environment (must not be committed)
+venv/
+env/
+.venv/
+
+# Large data artefacts that exceed GitHub's 100 MB single-file limit.
+# These are reproducible from the raw inputs via scripts/python/ and
+# scripts/R/ and so are not tracked. To replicate, follow README.md.
+data/raw/
+data/cleaned/baci_*.parquet
+data/cleaned/panel_main.parquet
+data/cleaned/panel_main_confounders.parquet
+data/cleaned/panel_main_subsample.parquet
+data/cleaned/panel_estimation.parquet
+data/cleaned/panel_estimation_pf.parquet
+data/cleaned/panel_skeleton.parquet
+data/cleaned/imf_fdi_bilateral.parquet
+data/cleaned/gravity_bilateral.parquet
+data/cleaned/cpmi_panel.parquet
+data/cleaned/active_pairs.parquet
+
+# Large estimation outputs (R .rds and CSV) — reproducible from scripts/.
+data/cleaned/*.rds
+data/cleaned/*.pkl
+data/cleaned/panel_main_tiny.csv
+data/cleaned/panel_estimation_medium.csv
+data/cleaned/panel_estimation_sample.csv
+data/cleaned/estimation_yearly_results.csv
+
+# Output / transient
+SESSION_REPORT.md
+quality_reports/research_journal.md
+
+# Streamlit local cache
+.streamlit/secrets.toml
+
+# macOS / Windows misc
+.DS_Store
+Thumbs.db

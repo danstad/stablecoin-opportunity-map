@@ -1,0 +1,60 @@
+\section{Data}
+\label{sec:data}
+
+\subsection{Trade flows}
+
+We use bilateral trade data from the BACI database maintained by CEPII, which reconciles mirror flows from UN Comtrade \citep{Head2014_gravity}. We aggregate to the HS2 level (94 product categories) across 226 exporting and importing countries for 2015--2023. The full panel contains 33.3 million observations, of which 8.9 million record positive trade flows (26.8\%). The remaining 24.4 million zeros, active country pairs that do not trade a given product in a given year, are essential for PPML estimation. The yearly cross-sections in the regulatory-shock estimation cover 2018--2023 (six years post-AMLD); the panel covers the same period and contains 2.82 million observations after the necessary merges.
+
+\subsection{Product complexity}
+
+We compute the Product Complexity Index (PCI) following the eigenvector method of \citet{Hidalgo2009_building_blocks}. For each country--product--year triplet, we first calculate Revealed Comparative Advantage (RCA). The PCI is the eigenvector associated with the second-largest eigenvalue of the product--product proximity matrix, which captures the breadth of capabilities embedded in each product. We fix PCI to the 2015--2017 base period average and standardize to zero mean and unit variance. This eliminates the reflection problem: PCI is predetermined relative to the regulatory shocks we study. Across the 94 HS2 categories, PCI is approximately normally distributed with slight left skew, ranging from raw materials and agricultural goods (low PCI) to electronics, machinery, and pharmaceuticals (high PCI). One standard deviation above the mean anchors the ``one SD more complex'' interpretation used throughout the results.
+
+\subsection{FDI-derisked corridors}
+
+We proxy persistent corridor-level reductions in financial linkage using bilateral FDI positions from the IMF Coordinated Direct Investment Survey (CDIS). The de-risking indicator is defined as:
+\begin{equation}
+\text{Derisked}_{ij,t} = \mathbf{1}\left[\frac{\text{FDI}_{ij,t}}{\overline{\text{FDI}}_{ij,2015\text{--}2017}} < 0.5\right]
+\label{eq:derisked}
+\end{equation}
+where $\overline{\text{FDI}}_{ij,2015\text{--}2017}$ is the average bilateral FDI position between countries $i$ and $j$ during the base period. A corridor is ``de-risked'' when its FDI position drops below 50\% of the base level. This threshold captures large, discrete disruptions to financial linkages.
+
+Bilateral FDI proxies for correspondent banking because FDI positions correlate with the density of financial-institution relationships: banks maintain correspondent accounts in jurisdictions where their clients invest and trade \citep{Rice2020_correspondent}. The 50\% threshold is our baseline; we verify robustness to 25\% and 75\% thresholds in Section~\ref{sec:robustness}. We refer to the underlying continuous variable, $\log(\text{FDI}_{ij,t} / \overline{\text{FDI}}_{ij,2015\text{--}2017})$, as $\text{fdi\_proxy}_{ij,t}$ in the data files. We do not have access to direct correspondent-banking relationship data from the BIS or SWIFT in this revision; the FDI-derived proxy is the closest available substitute, and direct CBR data would provide a sharper measure.\footnote{We attempted to obtain BIS Locational Banking Statistics on correspondent-banking relationships at the bilateral level. The data are not publicly disaggregated to the corridor-year cell required by our gravity specification. The $\text{fdi\_proxy}_{ij,t}$ measure is therefore a transformation of CDIS bilateral FDI ratios, not a direct CBR measure. We flag this distinction throughout. For continuity with earlier drafts, the on-disk parquet retains the legacy column name \texttt{pf\_cbr}; analysis code reads the column and immediately renames it to \texttt{fdi\_proxy}, and we refer to the variable as \texttt{fdi\_proxy} throughout the analysis to reflect its true provenance.}
+
+\subsection{Regulatory shocks}
+\label{subsec:reg_shocks}
+
+The regulatory-shock identification rests on three discrete indicators that enter the gravity equation in Section~\ref{sec:strategy} as interactions with PCI.
+
+\paragraph{FATF greylist.}
+We construct $\text{FATF}_{ct}$, an indicator equal to one if country $c$ is on the FATF greylist in year $t$, from FATF plenary statements published quarterly between February 2018 and October 2023. Greylisting follows a multi-year compliance review keyed to AML/CFT standards \citep{Borchert2024_broken_relationships}; the timing of designations is set by the FATF review calendar, not by bilateral trade flows. In our sample 38 countries are greylisted at some point during 2018--2023.
+
+\paragraph{EU AMLD post-2017.}
+We define
+\[
+\text{EU\_post2017}_{ij,t} = \mathbf{1}\{\text{both } i \text{ and } j \text{ are EU member states in } t \geq 2017\}.
+\]
+The Fourth EU Anti-Money-Laundering Directive (AMLD4) entered into force on 26 June 2017 and harmonized KYC and customer-due-diligence standards across EU member states. The indicator captures EU--EU corridors in the post-AMLD period.
+
+\paragraph{Confounder controls.}
+For the kitchen-sink specification we add two controls. Diplomatic disagreement, $\text{diplo\_disagreement}_{ij,t}$, is the UN General Assembly voting distance between countries $i$ and $j$ in year $t$, computed from the UNGA roll-call dataset. Regional trade agreement coverage, $\text{rta}_{ij,t}$, is an indicator equal to one if countries $i$ and $j$ are members of the same RTA in force in year $t$ (DESTA database). RTA coverage is incomplete: about 43\% of the country-pair--year cells in the panel have valid RTA observations, and the coverage attrition halves the panel sample to 1.37 million observations in the kitchen-sink specification.
+
+\subsection{Gravity controls}
+
+Standard gravity variables come from the CEPII GeoDist database \citep{Head2014_gravity}: bilateral distance (population-weighted, logged), contiguity, common official language, and colonial ties.
+
+\subsection{Summary statistics}
+
+Table~\ref{tab:sumstats} presents summary statistics for the estimation sample.
+
+\begin{table}[htbp]
+\centering
+\caption{Summary Statistics}
+\label{tab:sumstats}
+\begin{threeparttable}
+\small
+\input{tables/05_descriptive/summary_statistics}
+\begin{tablenotes}
+\tablenote{Sample includes all active country pairs (any positive bilateral trade during 2015--2023) $\times$ 94 HS2 products $\times$ 9 years. Trade value in thousands of USD. The variable $\text{fdi\_proxy}$ is the negative log of the bilateral FDI ratio relative to the 2015--2017 base period; it is a transformation of CDIS data, not a direct correspondent-banking measure. PCI standardized to zero mean, unit variance using 2015--2017 base period.}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

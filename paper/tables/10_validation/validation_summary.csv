@@ -1,0 +1,4 @@
+Test,Value
+Spearman (unconditional),0.155
+Spearman (conditional on GDP/cap),0.126
+N countries matched,149

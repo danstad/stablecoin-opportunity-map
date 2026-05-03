@@ -1,0 +1,59 @@
+{
+  "total_obs": 251498,
+  "n_reporters": 231,
+  "n_counterparts": 231,
+  "n_pairs": 33122,
+  "years": [
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "data_source_split": {
+    "derived": 147922,
+    "reported": 69131
+  },
+  "coverage_by_year": {
+    "2015.0": {
+      "n_pairs": 26138,
+      "n_reporters": 231
+    },
+    "2016.0": {
+      "n_pairs": 27560,
+      "n_reporters": 231
+    },
+    "2017.0": {
+      "n_pairs": 28092,
+      "n_reporters": 231
+    },
+    "2018.0": {
+      "n_pairs": 28702,
+      "n_reporters": 231
+    },
+    "2019.0": {
+      "n_pairs": 28734,
+      "n_reporters": 231
+    },
+    "2020.0": {
+      "n_pairs": 28090,
+      "n_reporters": 231
+    },
+    "2021.0": {
+      "n_pairs": 27848,
+      "n_reporters": 231
+    },
+    "2022.0": {
+      "n_pairs": 28598,
+      "n_reporters": 231
+    },
+    "2023.0": {
+      "n_pairs": 27736,
+      "n_reporters": 231
+    }
+  }
+}

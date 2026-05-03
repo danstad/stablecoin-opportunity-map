@@ -1,0 +1,61 @@
+\section{Empirical Strategy}
+\label{sec:strategy}
+
+\subsection{PPML gravity framework}
+
+We estimate a structural gravity model using Poisson Pseudo-Maximum Likelihood (PPML), which is consistent under heteroskedasticity and naturally accommodates the large mass of zero trade flows \citep{SantosSilva2006_ppml}. The estimating equation, written for an arbitrary friction shock $S_{ij,t}$, is:
+\begin{equation}
+\text{Trade}_{ijpt} = \exp\left(\beta_1 \, S_{ij,t} + \gamma \, S_{ij,t} \times \text{PCI}_p + \mathbf{X}_{ij}' \boldsymbol{\delta} + \alpha_{it} + \delta_{jt} + \theta_p\right) \times \varepsilon_{ijpt}
+\label{eq:gravity}
+\end{equation}
+where $\text{Trade}_{ijpt}$ is the value of exports from country $i$ to country $j$ in product $p$ at time $t$; $S_{ij,t}$ is one of three friction indicators introduced below; $\text{PCI}_p$ is the standardized product complexity index (fixed to 2015--2017); $\mathbf{X}_{ij}$ includes log bilateral distance, contiguity, common language, and colonial ties; $\alpha_{it}$ and $\delta_{jt}$ are exporter--year and importer--year fixed effects that absorb multilateral resistance and all time-varying country characteristics \citep{Anderson2003_gravity_gravitas}; and $\theta_p$ is a product fixed effect.
+
+The coefficient of interest is $\gamma$, which captures the differential effect of $S_{ij,t}$ on complex versus simple products. The sign of $\gamma$ tracks the direction of the friction shock: shocks that raise payment costs (FATF greylisting, FDI de-risking) predict $\gamma < 0$, and shocks that lower them (AMLD harmonization) predict $\gamma > 0$.
+
+In panel specifications, we add pair fixed effects $\mu_{ij}$ that absorb all time-invariant corridor characteristics (distance, language, colonial history, and any unobserved bilateral affinity), together with product--year fixed effects $\theta_{pt}$. With this saturated structure, identification of $\gamma$ comes purely from the within-pair, cross-product interaction of a corridor-level shock with PCI. Standard errors are clustered at the country-pair level to account for within-corridor correlation across products and time.
+
+\subsection{Three reduced-form natural experiments}
+\label{subsec:three_rf}
+
+We replace the single $S_{ij,t}$ in equation~(\ref{eq:gravity}) with three separate reduced forms, run in three single-channel specifications and one joint horse race.
+
+\paragraph{(1) FATF greylist $\times$ PCI (primary causal).}
+Greylisting is a binary, country-level designation issued after a multi-year compliance review by the Financial Action Task Force. Designations are announced at quarterly FATF plenaries and follow a structured AML/CFT review process \citep{Borchert2024_broken_relationships}. Greylisting raises correspondent-banking and KYC costs in the affected corridors, and the assignment is unrelated to bilateral goods trade in the corridor. We define
+\[
+\text{FATF}_{ct} = \mathbf{1}\{\text{country } c \text{ is on the FATF greylist in year } t\},
+\]
+and the friction interaction is $S_{ij,t} \times \text{PCI}_p = \mathbf{1}\{\text{either } i \text{ or } j \text{ is greylisted in } t\} \times \text{PCI}_p$. The model predicts $\gamma_{\text{FATF}} < 0$.
+
+\paragraph{(2) EU AMLD $\times$ PCI (symmetric counterpoint).}
+The Fourth EU Anti-Money-Laundering Directive (AMLD4) entered into force in 2017 and harmonized KYC and customer due diligence standards across EU member states. Because complex products pass through more compliance gates per shipment than simple commodities, harmonization reduces friction differentially in EU corridors. We define
+\[
+\text{EU\_post2017}_{ij,t} = \mathbf{1}\{\text{both } i \text{ and } j \text{ are EU member states in } t \geq 2017\}.
+\]
+The model predicts $\gamma_{\text{AMLD}} > 0$. The opposite sign relative to FATF is the central identification device: the same channel reacts symmetrically to friction increases and decreases.
+
+\paragraph{(3) FDI-derisked corridor $\times$ PCI (broad reduced form).}
+The FDI-derisked indicator captures persistent corridor-level reductions in financial linkage:
+\[
+\text{Derisked}_{ij,t} = \mathbf{1}\left\{\frac{\text{FDI}_{ij,t}}{\overline{\text{FDI}}_{ij,2015\text{--}2017}} < 0.5\right\},
+\]
+defined in equation~(\ref{eq:derisked}). FDI declines reflect the joint outcome of regulatory pressure, correspondent-banking exits, and risk reassessment, so the interaction is a broader reduced form than either FATF or AMLD. The model predicts $\gamma_{\text{FDI}} < 0$. Because the underlying FDI ratio varies continuously and persistently, we use this measure as the corridor-level intensity input to the Stablecoin Opportunity Score in Section~\ref{sec:sos}.
+
+\subsection{Identification}
+
+The interactions $S_{ij,t} \times \text{PCI}_p$ are identified from two sources of variation: (i) cross-corridor variation in shock status---which corridors are greylisted, EU--EU, or FDI-derisked---and (ii) within-corridor, cross-product variation in PCI. The pair-fixed-effects specification absorbs all time-invariant corridor heterogeneity, so $\gamma$ is identified from within-pair, cross-product differences in how each shock affects trade.
+
+\paragraph{Exogeneity, channel by channel.}
+For FATF, the exogeneity argument rests on the FATF review calendar: countries are reviewed on a multi-year rotation determined by AML/CFT compliance, not by bilateral trade flows in goods. Greylisting decisions are negotiated at quarterly plenaries and have no mechanical link to corridor-level trade in HS2 product categories. For AMLD, the harmonization shock is set at the EU level and applies to all EU members simultaneously; corridor-level trade flows do not determine which countries are EU members in 2017. For FDI de-risking, the exogeneity argument is weakest---FDI declines may be partly driven by the same trade decline they are used to predict---so we treat this channel as the broad reduced form rather than the primary causal estimate, and we report lag and pre-trend tests in Section~\ref{sec:robustness}.
+
+\paragraph{Identification stress tests.}
+The triple horse race (specification H1 in our notation, column~4 of Table~\ref{tab:panel_three_pronged}) estimates all three interactions jointly with pair and product--year fixed effects. The three coefficients identify whether each channel captures variation distinct from the others; the AMLD coefficient in particular cannot be a derivative of the FATF or FDI shocks if it survives the joint estimation with its sign intact. The kitchen-sink specification (H2/H3, column~5) adds diplomatic-disagreement and regional-trade-agreement controls. RTA coverage is incomplete and the sample halves to 1.37 million observations from 2.82 million; we report column~5 alongside column~4 as the bounds of an identifying-sample sensitivity analysis. Because EU membership in our sample is highly correlated with regulatory infrastructure that the kitchen sink captures only partially, the AMLD coefficient attenuates in column~5 even though the underlying mechanism is unchanged. We discuss this attenuation as a power problem driven by coverage in Section~\ref{sec:robustness}.
+
+\subsection{Threats to identification}
+
+\paragraph{Reverse causality.} If declining trade causes friction shocks (rather than the reverse), $S_{ij,t}$ is endogenous. For FATF and AMLD this is implausible: FATF designations follow AML/CFT compliance reviews, and AMLD is an EU-level legal instrument. For FDI de-risking, we estimate specifications with lagged $\text{Derisked}_{ij,t-1}$ and $\text{Derisked}_{ij,t-2}$, which are predetermined relative to current trade, and a lead specification using $\text{Derisked}_{ij,t+1}$ as a pre-trend test.
+
+\paragraph{Omitted variables.} Pair fixed effects absorb time-invariant confounders. A remaining threat requires a time-varying shock that (a) correlates with one of the three friction indicators and (b) differentially affects complex products. Diplomatic disagreement is the leading candidate. Section~\ref{sec:results} shows that diplomatic disagreement enters with a positive sign in the yearly kitchen-sink cross-sections and is statistically null in the panel kitchen-sink, so diplomatic distance does not explain the complexity penalty.
+
+\paragraph{Symmetry as an identification device.} The strongest piece of identifying evidence is the sign mirror across FATF and AMLD. A spurious channel---say, a generic ``advanced economies'' effect---would not produce opposite signs on opposite-direction friction shocks. The symmetry rules out broad classes of confounders and is the central reason we treat the two natural experiments as a unit rather than separately.
+
+\paragraph{Permutation inference.} We conduct a permutation test on the FDI-derisked indicator that randomly reassigns de-risking status across corridors, estimating the interaction coefficient under each permutation. If the true coefficient is more extreme than the null distribution, the result is not an artifact of the data structure.

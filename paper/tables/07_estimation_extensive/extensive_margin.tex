@@ -1,0 +1,37 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+note{ }={Standard errors clustered at the country level. Dependent variable: 1(RCA >= 1). PF = fraction of trade partners de-risked.},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]Q[]Q[]},
+hline{2}={1-5}{solid, black, 0.05em},
+hline{12}={1-5}{solid, black, 0.05em},
+hline{1}={1-5}{solid, black, 0.08em},
+hline{20}={1-5}{solid, black, 0.08em},
+column{2-5}={}{halign=c},
+column{1}={}{halign=l},
+}                     %% tabularray inner close
+& (1) Density & (2) + De-risking & (3) + Product FE & (4) Logit \\
+density & \num{4.154}*** & \num{4.059}*** & \num{4.108}*** & \num{45.527}*** \\
+& (\num{0.105}) & (\num{0.119}) & (\num{0.135}) & (\num{1.591}) \\
+density\_x\_pci & \num{0.100}*** & \num{0.057}*** &  & \num{1.313}*** \\
+& (\num{0.012}) & (\num{0.014}) &  & (\num{0.212}) \\
+pf\_country &  & \num{-0.450}*** & \num{-0.390}*** & \num{-3.198}** \\
+&  & (\num{0.104}) & (\num{0.106}) & (\num{1.404}) \\
+density\_x\_pf &  & \num{1.498}*** & \num{1.232}*** & \num{9.589}*** \\
+&  & (\num{0.372}) & (\num{0.370}) & (\num{3.542}) \\
+pf\_x\_pci &  & \num{0.152}*** &  & \num{-0.400} \\
+&  & (\num{0.024}) &  & (\num{0.381}) \\
+Num.Obs. & \num{212440} & \num{212440} & \num{212440} & \num{212440} \\
+R2 & \num{0.445} & \num{0.446} & \num{0.451} & \num{0.518} \\
+R2 Adj. & \num{0.444} & \num{0.446} & \num{0.450} & \num{0.516} \\
+R2 Within & \num{0.389} & \num{0.391} & \num{0.363} & \num{0.467} \\
+R2 Within Adj. & \num{0.389} & \num{0.391} & \num{0.363} & \num{0.467} \\
+FE: iso3 & X & X & X & X \\
+FE: year & X & X & X & X \\
+FE: hs4 &  &  & X &  \\
+\end{talltblr}
+\end{table}

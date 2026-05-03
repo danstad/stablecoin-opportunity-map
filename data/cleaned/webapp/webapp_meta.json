@@ -1,0 +1,23 @@
+{
+  "build_date": "2026-05-03T22:00:03Z",
+  "design_notes": {
+    "corridor_metric": "trade_value * max(-pf_cbr, 0); pf_cbr is FDI-derisked proxy",
+    "diversification_score": "density * pci_std",
+    "products_at_risk_sos_col": "sos_composite (top choice; matches country-level composite)",
+    "year_filter": 2023
+  },
+  "files": [
+    "country_lookup.parquet",
+    "products_at_risk.parquet",
+    "diversification_opps.parquet",
+    "corridor_top5.parquet"
+  ],
+  "row_counts": {
+    "corridor_top5": 1130,
+    "country_lookup": 226,
+    "diversification_opps": 1663,
+    "products_at_risk": 1813
+  },
+  "source_commit": "unknown",
+  "year_latest": 2023
+}

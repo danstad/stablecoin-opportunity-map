@@ -1,0 +1,5 @@
+quadrant,n_countries,mean_sos,median_sos,mean_gdppc
+Q1: Actionable,22,-0.01,0,44177
+Q2: Infrastructure Gap,61,-0.27,-0.14,23835
+Q3: Legal Complexity,5,-0.66,0.01,14296
+Q4: Blocked,138,-0.08,-0.05,9787

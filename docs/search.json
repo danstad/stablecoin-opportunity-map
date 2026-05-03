@@ -1,0 +1,205 @@
+[
+  {
+    "objectID": "method.html",
+    "href": "method.html",
+    "title": "Methodology",
+    "section": "",
+    "text": "Plain-language explainer. For the formal model, identification assumptions, and full robustness battery, see the working paper PDF."
+  },
+  {
+    "objectID": "method.html#why-this-matters",
+    "href": "method.html#why-this-matters",
+    "title": "Methodology",
+    "section": "Why this matters",
+    "text": "Why this matters\nCross-border payments depend on banks talking to other banks through a network called correspondent banking. Over the last decade, banks have been quietly walking away from each other — closing accounts, dropping relationships, refusing to clear payments through certain country pairs. Regulators call this de-risking.\nNot all trade is hit equally. Simple commodities can be paid for with cash, prepayment, or a single bank transfer. Complex products — semiconductors, pharmaceuticals, machinery — are different. They typically need a chain of trust: letters of credit, several banks acting in sequence, foreign-exchange settlement, extended payment terms. When the chain breaks, the kinds of trade that depend most on the chain are the kinds that get cut first.\nStablecoins — dollar-denominated digital tokens that move on blockchain networks — bypass the bank-to-bank chain entirely. The question is simple: where would they help most?"
+  },
+  {
+    "objectID": "method.html#the-intuition",
+    "href": "method.html#the-intuition",
+    "title": "Methodology",
+    "section": "The intuition",
+    "text": "The intuition\nIf payment-network problems hit complex trade harder than simple trade, the data should show a clean signature. We use three real-world events that pushed payment frictions in opposite directions:\n\nFATF greylisting (friction up). The global anti-money-laundering body publishes a watch list. Once listed, banks abroad become more cautious about clearing the country’s payments.\nEU AMLD harmonization (friction down). EU members adopted common AML rules in 2017. Within EU corridors, banks became more confident, not less.\nFDI-derisked corridors (friction up). When bilateral foreign-direct-investment positions collapse, the underlying financial relationship has typically broken. We mark a corridor de-risked if FDI fell more than 50% from its 2015–2017 average.\n\nA spurious channel — a generic “advanced economies do better” story — cannot produce opposite signs on opposite-direction shocks. The fact that AMLD pulls one way while FATF and FDI pull the other way is the cleanest causal-mechanism evidence available in this setting."
+  },
+  {
+    "objectID": "method.html#what-we-find",
+    "href": "method.html#what-we-find",
+    "title": "Methodology",
+    "section": "What we find",
+    "text": "What we find\nOn a panel of 226 countries, 94 product categories, and 2018–2023 (2.82 million observations), the three signs go the right way. Per standard deviation of product complexity:\n\nFATF greylisting reduces trade flow by 11–30%;\nEU AMLD raises it by 10–15% in EU corridors after 2017;\nFDI de-risking reduces it by 21–37%.\n\nThe pattern survives ten different ways of slicing the data, three different fixed-effect structures, and a battery of placebo tests using gravity variables (distance, language, regional-trade-agreement coverage) in place of the friction shocks: those placebos do not load, the friction shocks do."
+  },
+  {
+    "objectID": "method.html#what-this-is-good-for",
+    "href": "method.html#what-this-is-good-for",
+    "title": "Methodology",
+    "section": "What this is good for",
+    "text": "What this is good for\nThe estimated effects aggregate into a country-level Stablecoin Opportunity Score — a ranking of where alternative payment infrastructure would unlock the most economically valuable trade.\n\nThe composite top five are Haiti, Fiji, Syria, Lebanon, and Nicaragua — small economies with high friction exposure and limited regulatory alternatives.\nA second filter looks at where stablecoins could plausibly deploy today (capital-account openness × infrastructure readiness); within those 60 “actionable now” jurisdictions the top ten by SOS are Panama, Trinidad and Tobago, the United Arab Emirates, Bahrain, Georgia, San Marino, Uruguay, Oman, Armenia, and Kuwait."
+  },
+  {
+    "objectID": "method.html#what-this-analysis-is-and-isnt",
+    "href": "method.html#what-this-analysis-is-and-isnt",
+    "title": "Methodology",
+    "section": "What this analysis is — and isn’t",
+    "text": "What this analysis is — and isn’t\nThis is a preliminary analysis using publicly available data. Three limitations follow:\n\nDirect correspondent-banking data, ideally from BIS or SWIFT, would sharpen the test. Our FDI-based de-risking measure is a coarse stand-in for actual bank-to-bank account closures.\nHigher computing power would let us run the full panel rather than subsamples on the heaviest specifications. The full bilateral panel has roughly 33 million observations and does not fit in 16 GB of memory under the four-fixed-effect Poisson estimator we use for robustness; we use a stratified 3,000-pair subsample for those specifications.\nThe Chainalysis Global Crypto Adoption Index would replace the GDP-per-capita placeholder we use as the second axis of the feasibility filter — a behavioral measure of where stablecoin infrastructure already exists, rather than a developmental proxy.\n\nWhat this analysis can show with public data is the direction and order of magnitude of where stablecoins would help most and where they would help least. It cannot say exactly which corridors will respond first, or how fast adoption would translate into trade. Those questions need private data and longer time series.\nRead the full working paper (PDF)"
+  },
+  {
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "Data",
+    "section": "",
+    "text": "This analysis uses only publicly available data. No proprietary correspondent-banking or SWIFT data was used. All sources, vintages, and processing scripts are documented in the replication package."
+  },
+  {
+    "objectID": "data.html#sources",
+    "href": "data.html#sources",
+    "title": "Data",
+    "section": "Sources",
+    "text": "Sources\n\n\n\n\n\n\n\n\n\n\nBlock\nSource\nVintage\nCoverage\nNotes\n\n\n\n\nTrade flows\nBACI (CEPII)\n2024 release\n1995–2024, HS-92 6-digit, ~226 reporters × ~226 partners\nCleaned to HS-4; 2018–2023 used in main panel.\n\n\nProduct complexity (PCI)\nAtlas of Economic Complexity, Harvard Growth Lab\n2024 build\nHS4 product space\nStandardized to mean 0, sd 1 for the main interaction.\n\n\nRCA & Density\nHarvard Growth Lab\n2024 build\nCountry × HS4 × year\nDensity = average proximity to currently-exported products.\n\n\nFDI bilateral positions\nIMF Coordinated Direct Investment Survey (CDIS)\n2024 release\nCountry pairs, 2015–2023\n“De-risked” = bilateral inward FDI fell ≥ 50% from 2015–2017 baseline.\n\n\nFATF greylist timing\nFATF public statements\nThrough 2024\nAll listings & delistings since 2018\nManually compiled from FATF press releases.\n\n\nEU AMLD harmonization\nEUR-Lex (Directive 2015/849, transposition deadline 26 June 2017)\n2017 onwards\nEU-28 / EU-27 internal corridors\nTreatment = post-2017 indicator interacted with EU-pair flag.\n\n\nCapital-account openness\nChinn-Ito (KAOPEN)\n2024 update\n226 countries, latest year used\nRescaled to 0–1 for the feasibility filter.\n\n\nInfrastructure proxy\nWorld Bank (GDP per capita, internet penetration)\n2023 latest available\n226 countries\nComposite scaled 0–1 — to be replaced by Chainalysis Global Crypto Adoption Index in a future revision."
+  },
+  {
+    "objectID": "data.html#limitations-and-disclosure",
+    "href": "data.html#limitations-and-disclosure",
+    "title": "Data",
+    "section": "Limitations and disclosure",
+    "text": "Limitations and disclosure\nThis is a preliminary analysis using publicly available data. Three caveats:\n\nThe de-risking measure is a proxy. We do not observe correspondent-banking account closures directly; we use bilateral FDI collapses as a stand-in. Direct CBR data from the BIS Statistics on Correspondent Banking or SWIFT would sharpen the test.\nHeaviest specifications run on a subsample. The full bilateral × product × year panel exceeds the memory available under a four-fixed-effect Poisson estimator. A 3,000-pair stratified subsample is used for the most demanding specifications; the main results are robust to this restriction (see the paper’s robustness section).\nInfrastructure axis is a placeholder. GDP per capita / internet penetration is a coarse stand-in for where stablecoin infrastructure actually exists. The Chainalysis Global Crypto Adoption Index would be a direct replacement."
+  },
+  {
+    "objectID": "data.html#replication",
+    "href": "data.html#replication",
+    "title": "Data",
+    "section": "Replication",
+    "text": "Replication\nThe full pipeline (raw downloads → cleaned panels → estimation → SOS construction → site build) is reproducible from the project repository.\n\nRepo: github.com/daniel-prudencio/stablecoin-opportunity-map (placeholder — to be confirmed at deployment)\nData builder: scripts/python/20_build_webapp_data.py --format both produces every parquet and JSON file used by this site.\nWorking paper: assets/paper.pdf"
+  },
+  {
+    "objectID": "data.html#disclosure-built-with-claude-code",
+    "href": "data.html#disclosure-built-with-claude-code",
+    "title": "Data",
+    "section": "Disclosure: Built with Claude Code",
+    "text": "Disclosure: Built with Claude Code\nThe analysis pipeline, paper drafting, and this companion site were assembled in Claude Code, with the author providing direction, theory, and review. All code, data sources, and decisions are documented in the repository’s quality_reports/ and SESSION_REPORT.md. The author bears full responsibility for the analysis."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "The Stablecoin Opportunity Map asks where alternative payment infrastructure — specifically dollar-denominated stablecoins on public blockchain rails — would unlock the most economically valuable trade.\nThe premise is that complex products (semiconductors, pharmaceuticals, machinery) depend on a fragile bank-to-bank chain of trust to clear payment, and that this chain has been quietly breaking under post-2014 de-risking pressure. If stablecoins bypass the chain, the marginal value of adoption should be highest where the chain is most strained and the underlying trade is most complex. This site lets you see the framework applied country-by-country."
+  },
+  {
+    "objectID": "about.html#the-project",
+    "href": "about.html#the-project",
+    "title": "About",
+    "section": "",
+    "text": "The Stablecoin Opportunity Map asks where alternative payment infrastructure — specifically dollar-denominated stablecoins on public blockchain rails — would unlock the most economically valuable trade.\nThe premise is that complex products (semiconductors, pharmaceuticals, machinery) depend on a fragile bank-to-bank chain of trust to clear payment, and that this chain has been quietly breaking under post-2014 de-risking pressure. If stablecoins bypass the chain, the marginal value of adoption should be highest where the chain is most strained and the underlying trade is most complex. This site lets you see the framework applied country-by-country."
+  },
+  {
+    "objectID": "about.html#author",
+    "href": "about.html#author",
+    "title": "About",
+    "section": "Author",
+    "text": "Author\nDaniel Prudencio — Independent researcher (trade economics × economic complexity × fintech).\n\nEmail: prudencio.da@gmail.com\nWorking paper: assets/paper.pdf"
+  },
+  {
+    "objectID": "about.html#acknowledgments",
+    "href": "about.html#acknowledgments",
+    "title": "About",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nThe full analysis pipeline, manuscript drafting, and this companion site were built in Claude Code with the author providing the research questions, theoretical scaffolding, and review at every stage. All errors are the author’s.\nThe economic-complexity tooling builds on the Harvard Growth Lab’s Atlas of Economic Complexity and the methodology of Hidalgo & Hausmann (2009). The de-risking framing draws on the BIS Committee on Payments and Market Infrastructures literature and on World Bank correspondent-banking surveys."
+  },
+  {
+    "objectID": "about.html#companion-site",
+    "href": "about.html#companion-site",
+    "title": "About",
+    "section": "Companion site",
+    "text": "Companion site\n\nThis site is generated by Quarto with Observable JS reactive blocks. Source: site/ in the project repository.\nCharts use Observable Plot and D3.js; typography is Source Serif Pro.\nHosting: GitHub Pages, served from the docs/ folder of the main branch."
+  },
+  {
+    "objectID": "about.html#how-to-cite",
+    "href": "about.html#how-to-cite",
+    "title": "About",
+    "section": "How to cite",
+    "text": "How to cite\nUntil a permanent venue is announced, please cite the working-paper PDF:\n\nPrudencio, D. (2026). The Stablecoin Opportunity Map: Economic Complexity Meets Payment Innovation. Working paper."
+  },
+  {
+    "objectID": "country.html",
+    "href": "country.html",
+    "title": "Country detail",
+    "section": "",
+    "text": "Preliminary analysis using publicly available data. Single page, reactive on the ?iso3= URL parameter. Default view: Haiti (HTI). Back to all countries.\nimport {decompositionBars, corridorBars, productTreemap} from \"./_ojs/charts.js\";\nimport {getIso3, countryHref} from \"./_ojs/router.js\";\nimport {fmt2, fmt1, fmtRank, fmtUSDM} from \"./_ojs/format.js\";\nPlot = require(\"@observablehq/plot@0.6\")\nd3   = require(\"d3@7\")\nhtl  = require(\"htl@0.3\")\nsos    = await FileAttachment(\"_data/sos_country.json\").json()\nparAll = await FileAttachment(\"_data/products_at_risk.json\").json()\ndivAll = await FileAttachment(\"_data/diversification_opps.json\").json()\ncorAll = await FileAttachment(\"_data/corridors_top5.json\").json()\n// Reactive iso3 from URL, controllable via the dropdown below.\ninitialIso3 = getIso3()\nviewof iso3 = Inputs.select(\n  sos.slice().sort((a, b) =&gt; (a.name || \"\").localeCompare(b.name || \"\")),\n  {\n    label: \"Country\",\n    format: x =&gt; `${x.name} (${x.iso3})`,\n    value: sos.find(d =&gt; d.iso3 === initialIso3) || sos[0]\n  }\n)\ncountry = iso3 || sos.find(d =&gt; d.iso3 === initialIso3) || sos[0]\nnCountries = sos.filter(d =&gt; d.rank_composite != null).length\n\n// Sample medians (used as \"vs sample\" context in KPIs and bars).\nmedian = ({\n  sos_composite: d3.median(sos, d =&gt; d.sos_composite),\n  sos_fatf:      d3.median(sos, d =&gt; d.sos_fatf),\n  sos_fdi:       d3.median(sos, d =&gt; d.sos_fdi),\n  sos_amld:      d3.median(sos, d =&gt; d.sos_amld),\n  trade_derisked: d3.median(sos, d =&gt; d.trade_derisked)\n})\n// --- Header (country name + composite + rank + quadrant chip) ---------\n{\n  const q = (country.quadrant || \"\").trim();\n  const chipClass = [\"Q1\",\"Q2\",\"Q3\",\"Q4\"].includes(q) ? `quadrant-${q}` : \"quadrant-other\";\n  const qLabel = country.quadrant_label || (q || \"—\");\n  return htl.html`\n    &lt;div class=\"country-header\"&gt;\n      &lt;span class=\"country-name\"&gt;${country.name || country.iso3}&lt;/span&gt;\n      &lt;span class=\"country-iso\"&gt;${country.iso3}&lt;/span&gt;\n      &lt;span class=\"quadrant-chip ${chipClass}\"&gt;${qLabel}&lt;/span&gt;\n    &lt;/div&gt;\n    &lt;div class=\"sos-caption\"&gt;\n      Composite SOS:\n      &lt;strong&gt;${fmt2(country.sos_composite)}&lt;/strong&gt;\n       · Rank\n      &lt;strong&gt;${fmtRank(country.rank_composite, nCountries)}&lt;/strong&gt;\n       · Region: ${country.region || \"—\"}\n    &lt;/div&gt;\n  `;\n}\n// --- KPI tile row -----------------------------------------------------\n{\n  const card = (label, value, sub = \"\") =&gt; htl.html`\n    &lt;div class=\"kpi-card\"&gt;\n      &lt;div class=\"kpi-label\"&gt;${label}&lt;/div&gt;\n      &lt;div class=\"kpi-value\"&gt;${value}&lt;/div&gt;\n      ${sub ? htl.html`&lt;div class=\"kpi-sub\"&gt;${sub}&lt;/div&gt;` : \"\"}\n    &lt;/div&gt;\n  `;\n  const dComp = (country.sos_composite != null && median.sos_composite != null)\n                ? (country.sos_composite - median.sos_composite) : null;\n  return htl.html`&lt;div class=\"kpi-row\"&gt;\n    ${card(\"Composite SOS\", fmt2(country.sos_composite),\n           dComp == null ? \"\" : `${dComp &gt;= 0 ? \"+\" : \"\"}${dComp.toFixed(2)} vs sample median`)}\n    ${card(\"FATF SOS\", fmt2(country.sos_fatf))}\n    ${card(\"FDI SOS\",  fmt2(country.sos_fdi))}\n    ${card(\"AMLD adj.\", fmt2(country.sos_amld))}\n    ${card(\"Trade derisked (USD)\", fmtUSDM(country.trade_derisked))}\n  &lt;/div&gt;`;\n}"
+  },
+  {
+    "objectID": "country.html#three-pronged-decomposition",
+    "href": "country.html#three-pronged-decomposition",
+    "title": "Country detail",
+    "section": "Three-pronged decomposition",
+    "text": "Three-pronged decomposition\n\nEach component aggregates the country’s exposure to one of the three natural experiments: FATF greylisting, FDI-derisked corridors, and EU AMLD harmonization. Sample-median bar in grey for context.\n\n\ndecompositionBars(Plot, htl, country, median, {height: 280})"
+  },
+  {
+    "objectID": "country.html#product-exposure-treemap",
+    "href": "country.html#product-exposure-treemap",
+    "title": "Country detail",
+    "section": "Product exposure treemap",
+    "text": "Product exposure treemap\n\nHS-section blocks group HS chapters. Color encodes the country-product composite SOS score (viridis); size encodes total trade in that HS chapter. Top 50 categories shown; the rest aggregated as “Other”. Hover for details.\n\n\ntreemapData = await fetch(`_data/treemap/treemap_${country.iso3}.json`)\n  .then(r =&gt; r.ok ? r.json() : [])\n  .catch(() =&gt; [])\n\n\n\n\n\n\n\n{\n  if (!treemapData || treemapData.length === 0) {\n    return htl.html`&lt;div class=\"sos-caption\"&gt;No product treemap data available for ${country.iso3}.&lt;/div&gt;`;\n  }\n  return productTreemap(d3, treemapData, {width: 960, height: 480});\n}"
+  },
+  {
+    "objectID": "country.html#products-at-risk",
+    "href": "country.html#products-at-risk",
+    "title": "Country detail",
+    "section": "Products at risk",
+    "text": "Products at risk\n\nTop product categories where this country has revealed comparative advantage (RCA ≥ 1) and the SOS composite is in the upper range. These are the exports most exposed to payment-friction shocks.\n\n\nparRows = parAll\n  .filter(r =&gt; r.iso3 === country.iso3)\n  .sort((a, b) =&gt; (a.rank_within_country || 999) - (b.rank_within_country || 999))\n  .map(r =&gt; ({\n    Rank: r.rank_within_country,\n    HS: r.hs4,\n    Product: r.product_name,\n    SOS:    r.sos_score,\n    \"PCI (std)\": r.pci_std,\n    RCA:    r.rca,\n    \"Trade (USD)\": r.trade_value\n  }))\n\n\n\n\n\n\n\nparRows.length === 0\n  ? htl.html`&lt;div class=\"sos-caption\"&gt;No products-at-risk data available for ${country.iso3}.&lt;/div&gt;`\n  : Inputs.table(parRows, {\n      format: {\n        \"SOS\":    x =&gt; x == null ? \"—\" : x.toFixed(3),\n        \"PCI (std)\": x =&gt; x == null ? \"—\" : x.toFixed(2),\n        \"RCA\":    x =&gt; x == null ? \"—\" : x.toFixed(2),\n        \"Trade (USD)\": x =&gt; x == null ? \"—\" : Math.round(x).toLocaleString()\n      },\n      align: {Rank: \"right\", SOS: \"right\", \"PCI (std)\": \"right\", RCA: \"right\", \"Trade (USD)\": \"right\"},\n      rows: 20\n    })"
+  },
+  {
+    "objectID": "country.html#diversification-opportunities",
+    "href": "country.html#diversification-opportunities",
+    "title": "Country detail",
+    "section": "Diversification opportunities",
+    "text": "Diversification opportunities\n\nProducts with high proximity (density) to the country’s existing export basket and meaningful complexity, where RCA is currently below 1. Higher diversification score = better-feasibility upgrades.\n\n\ndivRows = divAll\n  .filter(r =&gt; r.iso3 === country.iso3)\n  .sort((a, b) =&gt; (a.rank_within_country || 999) - (b.rank_within_country || 999))\n  .map(r =&gt; ({\n    Rank: r.rank_within_country,\n    HS: r.hs4,\n    Product: r.product_name,\n    Density: r.density,\n    \"PCI (std)\": r.pci_std,\n    RCA: r.rca,\n    \"Diversification score\": r.diversification_score\n  }))\n\n\n\n\n\n\n\ndivRows.length === 0\n  ? htl.html`&lt;div class=\"sos-caption\"&gt;No diversification-opportunity data available for ${country.iso3}.&lt;/div&gt;`\n  : Inputs.table(divRows, {\n      format: {\n        \"Density\":   x =&gt; x == null ? \"—\" : x.toFixed(3),\n        \"PCI (std)\": x =&gt; x == null ? \"—\" : x.toFixed(2),\n        \"RCA\":       x =&gt; x == null ? \"—\" : x.toFixed(2),\n        \"Diversification score\": x =&gt; x == null ? \"—\" : x.toFixed(3)\n      },\n      align: {Rank: \"right\", Density: \"right\", \"PCI (std)\": \"right\", RCA: \"right\", \"Diversification score\": \"right\"},\n      rows: 20\n    })"
+  },
+  {
+    "objectID": "country.html#top-5-derisked-corridors",
+    "href": "country.html#top-5-derisked-corridors",
+    "title": "Country detail",
+    "section": "Top-5 derisked corridors",
+    "text": "Top-5 derisked corridors\n\nBilateral partners contributing most to the country’s SOS via the FDI-derisked channel. Derisked flags corridors where bilateral FDI fell more than 50% from its 2015–2017 baseline.\n\n\ncorRows = corAll\n  .filter(r =&gt; r.iso3 === country.iso3)\n  .sort((a, b) =&gt; (a.rank_within_country || 999) - (b.rank_within_country || 999))\n  .slice(0, 5)\n\ncorridorBars(Plot, corRows, {height: 280})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n← Back to all countries · Methodology · Data"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "The Stablecoin Opportunity Map",
+    "section": "",
+    "text": "Preliminary analysis using publicly available data. Trade flows from BACI; complexity from the Harvard Growth Lab; de-risking from IMF bilateral FDI; FATF greylist and EU AMLD timing from public sources. See the Methodology and Data pages for limitations.\nimport {choropleth, quadrantScatter} from \"./_ojs/charts.js\";\nimport {countryHref} from \"./_ojs/router.js\";\nimport {fmt2} from \"./_ojs/format.js\";\nPlot = require(\"@observablehq/plot@0.6\")\nd3   = require(\"d3@7\")\nhtl  = require(\"htl@0.3\")\ntopojson = require(\"topojson-client@3\")\nsos = await FileAttachment(\"_data/sos_country.json\").json()\nsosByIso3 = new Map(sos.map(d =&gt; [d.iso3, d]))\nworldWithIso3 = await FileAttachment(\"_data/world.geojson\").json()"
+  },
+  {
+    "objectID": "index.html#composite-sos-across-the-world",
+    "href": "index.html#composite-sos-across-the-world",
+    "title": "The Stablecoin Opportunity Map",
+    "section": "Composite SOS across the world",
+    "text": "Composite SOS across the world\n\nHigher values flag countries where complex-goods trade is most exposed to correspondent-banking frictions. Hover for country, score, and rank.\n\n\nchoropleth(Plot, worldWithIso3, sosByIso3, {height: 480})"
+  },
+  {
+    "objectID": "index.html#top-20-by-composite-sos",
+    "href": "index.html#top-20-by-composite-sos",
+    "title": "The Stablecoin Opportunity Map",
+    "section": "Top 20 by composite SOS",
+    "text": "Top 20 by composite SOS\n\nClick a country in the table or use the selector below to open its country page.\n\n\ntop20 = sos\n  .filter(d =&gt; d.sos_composite != null && d.rank_composite != null)\n  .sort((a, b) =&gt; a.rank_composite - b.rank_composite)\n  .slice(0, 20)\n  .map(d =&gt; ({\n    Rank: d.rank_composite,\n    Country: d.name,\n    ISO3: d.iso3,\n    \"Composite SOS\": +d.sos_composite,\n    FATF:  d.sos_fatf  != null ? +d.sos_fatf  : null,\n    FDI:   d.sos_fdi   != null ? +d.sos_fdi   : null,\n    AMLD:  d.sos_amld  != null ? +d.sos_amld  : null,\n    \"Quadrant\": d.quadrant_label || \"\"\n  }))\n\nInputs.table(top20, {\n  format: {\n    \"Composite SOS\": x =&gt; x == null ? \"—\" : x.toFixed(2),\n    \"FATF\":  x =&gt; x == null ? \"—\" : x.toFixed(2),\n    \"FDI\":   x =&gt; x == null ? \"—\" : x.toFixed(2),\n    \"AMLD\":  x =&gt; x == null ? \"—\" : x.toFixed(2),\n    \"Rank\":  x =&gt; x == null ? \"—\" : Math.round(x)\n  },\n  align: {Rank: \"right\", \"Composite SOS\": \"right\", FATF: \"right\", FDI: \"right\", AMLD: \"right\"},\n  rows: 20\n})"
+  },
+  {
+    "objectID": "index.html#open-a-country",
+    "href": "index.html#open-a-country",
+    "title": "The Stablecoin Opportunity Map",
+    "section": "Open a country",
+    "text": "Open a country\n\nviewof picked = Inputs.select(\n  sos.slice().sort((a, b) =&gt; (a.name || \"\").localeCompare(b.name || \"\")),\n  {label: \"Country\", format: x =&gt; `${x.name} (${x.iso3})`, value: sos.find(d =&gt; d.iso3 === \"HTI\") || sos[0]}\n)\n\n\n\n\n\n\n\n{\n  if (!picked || !picked.iso3) return htl.html`&lt;div class=\"sos-caption\"&gt;Pick a country to open its profile.&lt;/div&gt;`;\n  const url = countryHref(picked.iso3);\n  return htl.html`&lt;div class=\"sos-caption\"&gt;\n    Open &lt;a href=\"${url}\"&gt;&lt;strong&gt;${picked.name}&lt;/strong&gt; (${picked.iso3})&lt;/a&gt;\n    or pick another country above.\n  &lt;/div&gt;`;\n}"
+  },
+  {
+    "objectID": "index.html#feasibility-quadrant",
+    "href": "index.html#feasibility-quadrant",
+    "title": "The Stablecoin Opportunity Map",
+    "section": "Feasibility quadrant",
+    "text": "Feasibility quadrant\n\nCapital openness (Chinn-Ito) on x; infrastructure / GDP-per-capita score on y; bubble size and color = composite SOS. Q1 (top-right) flags actionable-now jurisdictions; Q4 (bottom-left) is structurally blocked.\n\n\nquadrantScatter(Plot, sos, {height: 460})"
+  },
+  {
+    "objectID": "index.html#how-to-read-this",
+    "href": "index.html#how-to-read-this",
+    "title": "The Stablecoin Opportunity Map",
+    "section": "How to read this",
+    "text": "How to read this\n\nComposite SOS rolls up three independent natural experiments — FATF greylisting, FDI-derisked corridors, and EU AMLD harmonization — into a single country-level score. Higher = more exposure to correspondent-banking frictions on complex-goods trade.\nThree components (FATF / FDI / AMLD) decompose the headline score and identify which channel dominates for each country.\nQuadrants combine the SOS with two readiness dimensions (capital openness × infrastructure) so an analyst can separate high-need from actionable-now jurisdictions."
+  }
+]

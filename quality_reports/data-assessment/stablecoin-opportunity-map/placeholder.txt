@@ -1,0 +1,2 @@
+This directory contains the data assessment for the Stablecoin Opportunity Map project.
+See data_exploration_payment_frictions.md in the parent directory for the full assessment.

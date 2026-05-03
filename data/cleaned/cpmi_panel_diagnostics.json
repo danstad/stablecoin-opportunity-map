@@ -1,0 +1,228 @@
+{
+  "n_countries": 26,
+  "countries": [
+    "ARG",
+    "AUS",
+    "BEL",
+    "BRA",
+    "CAN",
+    "CHE",
+    "CHN",
+    "DEU",
+    "ESP",
+    "FRA",
+    "GBR",
+    "HKG",
+    "IDN",
+    "IND",
+    "ITA",
+    "JPN",
+    "KOR",
+    "MEX",
+    "NLD",
+    "RUS",
+    "SAU",
+    "SGP",
+    "SWE",
+    "TUR",
+    "USA",
+    "ZAF"
+  ],
+  "years": [
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "n_rows": 311,
+  "columns": [
+    "iso2",
+    "year",
+    "swift_msg_sent_all",
+    "swift_msg_recv_all",
+    "swift_msg_sent_cat1",
+    "swift_msg_recv_cat1",
+    "swift_msg_sent_cat2",
+    "swift_msg_recv_cat2",
+    "swift_msg_domestic",
+    "swift_msg_total",
+    "swift_cat1_share",
+    "swift_participants_all",
+    "swift_members",
+    "swift_submembers",
+    "n_banks_total",
+    "n_foreign_banks",
+    "n_bank_branches",
+    "n_emoney_issuers",
+    "n_emoney_nonbanks",
+    "n_institutions_all",
+    "foreign_bank_share",
+    "fast_payment_txns",
+    "cashless_payment_txns",
+    "cashless_payment_value",
+    "gdp_ct1",
+    "population_ct1",
+    "n_participants_lvps",
+    "n_participants_retail_ps",
+    "n_participants_fast_ps",
+    "lvps_txn_count",
+    "lvps_txn_value",
+    "retail_ps_txn_count",
+    "retail_ps_txn_value",
+    "fast_ps_txn_count",
+    "fast_ps_txn_value",
+    "iso3",
+    "cashless_per_capita",
+    "swift_msg_per_capita"
+  ],
+  "coverage": {
+    "swift_msg_sent_all": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_msg_recv_all": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_msg_sent_cat1": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_msg_recv_cat1": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_msg_sent_cat2": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_msg_recv_cat2": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_msg_domestic": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_msg_total": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_cat1_share": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_participants_all": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_members": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "swift_submembers": {
+      "n_valid": 311,
+      "pct": 100.0
+    },
+    "n_banks_total": {
+      "n_valid": 300,
+      "pct": 96.5
+    },
+    "n_foreign_banks": {
+      "n_valid": 238,
+      "pct": 76.5
+    },
+    "n_bank_branches": {
+      "n_valid": 285,
+      "pct": 91.6
+    },
+    "n_emoney_issuers": {
+      "n_valid": 160,
+      "pct": 51.4
+    },
+    "n_emoney_nonbanks": {
+      "n_valid": 114,
+      "pct": 36.7
+    },
+    "n_institutions_all": {
+      "n_valid": 261,
+      "pct": 83.9
+    },
+    "foreign_bank_share": {
+      "n_valid": 237,
+      "pct": 76.2
+    },
+    "fast_payment_txns": {
+      "n_valid": 128,
+      "pct": 41.2
+    },
+    "cashless_payment_txns": {
+      "n_valid": 293,
+      "pct": 94.2
+    },
+    "cashless_payment_value": {
+      "n_valid": 293,
+      "pct": 94.2
+    },
+    "gdp_ct1": {
+      "n_valid": 309,
+      "pct": 99.4
+    },
+    "population_ct1": {
+      "n_valid": 309,
+      "pct": 99.4
+    },
+    "n_participants_lvps": {
+      "n_valid": 260,
+      "pct": 83.6
+    },
+    "n_participants_retail_ps": {
+      "n_valid": 223,
+      "pct": 71.7
+    },
+    "n_participants_fast_ps": {
+      "n_valid": 69,
+      "pct": 22.2
+    },
+    "lvps_txn_count": {
+      "n_valid": 268,
+      "pct": 86.2
+    },
+    "lvps_txn_value": {
+      "n_valid": 268,
+      "pct": 86.2
+    },
+    "retail_ps_txn_count": {
+      "n_valid": 238,
+      "pct": 76.5
+    },
+    "retail_ps_txn_value": {
+      "n_valid": 238,
+      "pct": 76.5
+    },
+    "fast_ps_txn_count": {
+      "n_valid": 75,
+      "pct": 24.1
+    },
+    "fast_ps_txn_value": {
+      "n_valid": 75,
+      "pct": 24.1
+    },
+    "cashless_per_capita": {
+      "n_valid": 293,
+      "pct": 94.2
+    },
+    "swift_msg_per_capita": {
+      "n_valid": 309,
+      "pct": 99.4
+    }
+  }
+}

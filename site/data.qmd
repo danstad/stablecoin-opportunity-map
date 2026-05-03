@@ -1,0 +1,42 @@
+---
+title: "Data"
+pagetitle: "Data — Stablecoin Opportunity Map"
+description-meta: "Public data sources, replication package, and disclosure notes for the Stablecoin Opportunity Map."
+---
+
+::: {.sos-disclaimer}
+**This analysis uses only publicly available data.** No proprietary correspondent-banking or SWIFT data was used. All sources, vintages, and processing scripts are documented in the replication package.
+:::
+
+## Sources
+
+| Block | Source | Vintage | Coverage | Notes |
+|---|---|---|---|---|
+| Trade flows | **BACI** (CEPII) | 2024 release | 1995–2024, HS-92 6-digit, ~226 reporters × ~226 partners | Cleaned to HS-4; 2018–2023 used in main panel. |
+| Product complexity (PCI) | **Atlas of Economic Complexity**, Harvard Growth Lab | 2024 build | HS4 product space | Standardized to mean 0, sd 1 for the main interaction. |
+| RCA & Density | Harvard Growth Lab | 2024 build | Country × HS4 × year | Density = average proximity to currently-exported products. |
+| FDI bilateral positions | **IMF Coordinated Direct Investment Survey (CDIS)** | 2024 release | Country pairs, 2015–2023 | "De-risked" = bilateral inward FDI fell ≥ 50% from 2015–2017 baseline. |
+| FATF greylist timing | **FATF public statements** | Through 2024 | All listings & delistings since 2018 | Manually compiled from FATF press releases. |
+| EU AMLD harmonization | **EUR-Lex** (Directive 2015/849, transposition deadline 26 June 2017) | 2017 onwards | EU-28 / EU-27 internal corridors | Treatment = post-2017 indicator interacted with EU-pair flag. |
+| Capital-account openness | **Chinn-Ito (KAOPEN)** | 2024 update | 226 countries, latest year used | Rescaled to 0–1 for the feasibility filter. |
+| Infrastructure proxy | **World Bank** (GDP per capita, internet penetration) | 2023 latest available | 226 countries | Composite scaled 0–1 — to be replaced by Chainalysis Global Crypto Adoption Index in a future revision. |
+
+## Limitations and disclosure
+
+This is a **preliminary analysis using publicly available data**. Three caveats:
+
+1. **The de-risking measure is a proxy.** We do not observe correspondent-banking account closures directly; we use bilateral FDI collapses as a stand-in. Direct CBR data from the BIS Statistics on Correspondent Banking or SWIFT would sharpen the test.
+2. **Heaviest specifications run on a subsample.** The full bilateral × product × year panel exceeds the memory available under a four-fixed-effect Poisson estimator. A 3,000-pair stratified subsample is used for the most demanding specifications; the main results are robust to this restriction (see the paper's robustness section).
+3. **Infrastructure axis is a placeholder.** GDP per capita / internet penetration is a coarse stand-in for where stablecoin infrastructure actually exists. The Chainalysis Global Crypto Adoption Index would be a direct replacement.
+
+## Replication
+
+The full pipeline (raw downloads → cleaned panels → estimation → SOS construction → site build) is reproducible from the project repository.
+
+- **Repo:** [github.com/daniel-prudencio/stablecoin-opportunity-map](https://github.com/daniel-prudencio/stablecoin-opportunity-map) *(placeholder — to be confirmed at deployment)*
+- **Data builder:** `scripts/python/20_build_webapp_data.py --format both` produces every parquet and JSON file used by this site.
+- **Working paper:** [assets/paper.pdf](assets/paper.pdf)
+
+## Disclosure: Built with Claude Code
+
+The analysis pipeline, paper drafting, and this companion site were assembled in Claude Code, with the author providing direction, theory, and review. All code, data sources, and decisions are documented in the repository's `quality_reports/` and `SESSION_REPORT.md`. The author bears full responsibility for the analysis.

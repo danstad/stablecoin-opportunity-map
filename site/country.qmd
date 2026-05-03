@@ -1,0 +1,238 @@
+---
+title: "Country detail"
+pagetitle: "Country detail — Stablecoin Opportunity Map"
+description-meta: "Per-country Stablecoin Opportunity Score: composite, three-pronged decomposition, product treemap, products at risk, diversification opportunities, and top corridors."
+---
+
+::: {.sos-disclaimer}
+**Preliminary analysis using publicly available data.** Single page, reactive on the `?iso3=` URL parameter. Default view: Haiti (HTI). [Back to all countries](index.qmd).
+:::
+
+```{ojs}
+//| echo: false
+import {decompositionBars, corridorBars, productTreemap} from "./_ojs/charts.js";
+import {getIso3, countryHref} from "./_ojs/router.js";
+import {fmt2, fmt1, fmtRank, fmtUSDM} from "./_ojs/format.js";
+Plot = require("@observablehq/plot@0.6")
+d3   = require("d3@7")
+htl  = require("htl@0.3")
+```
+
+```{ojs}
+//| echo: false
+sos    = await FileAttachment("_data/sos_country.json").json()
+parAll = await FileAttachment("_data/products_at_risk.json").json()
+divAll = await FileAttachment("_data/diversification_opps.json").json()
+corAll = await FileAttachment("_data/corridors_top5.json").json()
+```
+
+```{ojs}
+//| echo: false
+// Reactive iso3 from URL, controllable via the dropdown below.
+initialIso3 = getIso3()
+```
+
+```{ojs}
+//| echo: false
+viewof iso3 = Inputs.select(
+  sos.slice().sort((a, b) => (a.name || "").localeCompare(b.name || "")),
+  {
+    label: "Country",
+    format: x => `${x.name} (${x.iso3})`,
+    value: sos.find(d => d.iso3 === initialIso3) || sos[0]
+  }
+)
+```
+
+```{ojs}
+//| echo: false
+country = iso3 || sos.find(d => d.iso3 === initialIso3) || sos[0]
+nCountries = sos.filter(d => d.rank_composite != null).length
+
+// Sample medians (used as "vs sample" context in KPIs and bars).
+median = ({
+  sos_composite: d3.median(sos, d => d.sos_composite),
+  sos_fatf:      d3.median(sos, d => d.sos_fatf),
+  sos_fdi:       d3.median(sos, d => d.sos_fdi),
+  sos_amld:      d3.median(sos, d => d.sos_amld),
+  trade_derisked: d3.median(sos, d => d.trade_derisked)
+})
+```
+
+```{ojs}
+//| echo: false
+// --- Header (country name + composite + rank + quadrant chip) ---------
+{
+  const q = (country.quadrant || "").trim();
+  const chipClass = ["Q1","Q2","Q3","Q4"].includes(q) ? `quadrant-${q}` : "quadrant-other";
+  const qLabel = country.quadrant_label || (q || "—");
+  return htl.html`
+    <div class="country-header">
+      <span class="country-name">${country.name || country.iso3}</span>
+      <span class="country-iso">${country.iso3}</span>
+      <span class="quadrant-chip ${chipClass}">${qLabel}</span>
+    </div>
+    <div class="sos-caption">
+      Composite SOS:
+      <strong>${fmt2(country.sos_composite)}</strong>
+       · Rank
+      <strong>${fmtRank(country.rank_composite, nCountries)}</strong>
+       · Region: ${country.region || "—"}
+    </div>
+  `;
+}
+```
+
+```{ojs}
+//| echo: false
+// --- KPI tile row -----------------------------------------------------
+{
+  const card = (label, value, sub = "") => htl.html`
+    <div class="kpi-card">
+      <div class="kpi-label">${label}</div>
+      <div class="kpi-value">${value}</div>
+      ${sub ? htl.html`<div class="kpi-sub">${sub}</div>` : ""}
+    </div>
+  `;
+  const dComp = (country.sos_composite != null && median.sos_composite != null)
+                ? (country.sos_composite - median.sos_composite) : null;
+  return htl.html`<div class="kpi-row">
+    ${card("Composite SOS", fmt2(country.sos_composite),
+           dComp == null ? "" : `${dComp >= 0 ? "+" : ""}${dComp.toFixed(2)} vs sample median`)}
+    ${card("FATF SOS", fmt2(country.sos_fatf))}
+    ${card("FDI SOS",  fmt2(country.sos_fdi))}
+    ${card("AMLD adj.", fmt2(country.sos_amld))}
+    ${card("Trade derisked (USD)", fmtUSDM(country.trade_derisked))}
+  </div>`;
+}
+```
+
+## Three-pronged decomposition
+
+::: {.sos-caption}
+Each component aggregates the country's exposure to one of the three natural experiments: FATF greylisting, FDI-derisked corridors, and EU AMLD harmonization. Sample-median bar in grey for context.
+:::
+
+```{ojs}
+//| echo: false
+decompositionBars(Plot, htl, country, median, {height: 280})
+```
+
+## Product exposure treemap
+
+::: {.sos-caption}
+HS-section blocks group HS chapters. Color encodes the country-product composite SOS score (viridis); size encodes total trade in that HS chapter. Top 50 categories shown; the rest aggregated as "Other". Hover for details.
+:::
+
+```{ojs}
+//| echo: false
+treemapData = await fetch(`_data/treemap/treemap_${country.iso3}.json`)
+  .then(r => r.ok ? r.json() : [])
+  .catch(() => [])
+```
+
+```{ojs}
+//| echo: false
+{
+  if (!treemapData || treemapData.length === 0) {
+    return htl.html`<div class="sos-caption">No product treemap data available for ${country.iso3}.</div>`;
+  }
+  return productTreemap(d3, treemapData, {width: 960, height: 480});
+}
+```
+
+## Products at risk
+
+::: {.sos-caption}
+Top product categories where this country has revealed comparative advantage (RCA ≥ 1) and the SOS composite is in the upper range. These are the exports most exposed to payment-friction shocks.
+:::
+
+```{ojs}
+//| echo: false
+parRows = parAll
+  .filter(r => r.iso3 === country.iso3)
+  .sort((a, b) => (a.rank_within_country || 999) - (b.rank_within_country || 999))
+  .map(r => ({
+    Rank: r.rank_within_country,
+    HS: r.hs4,
+    Product: r.product_name,
+    SOS:    r.sos_score,
+    "PCI (std)": r.pci_std,
+    RCA:    r.rca,
+    "Trade (USD)": r.trade_value
+  }))
+```
+
+```{ojs}
+//| echo: false
+parRows.length === 0
+  ? htl.html`<div class="sos-caption">No products-at-risk data available for ${country.iso3}.</div>`
+  : Inputs.table(parRows, {
+      format: {
+        "SOS":    x => x == null ? "—" : x.toFixed(3),
+        "PCI (std)": x => x == null ? "—" : x.toFixed(2),
+        "RCA":    x => x == null ? "—" : x.toFixed(2),
+        "Trade (USD)": x => x == null ? "—" : Math.round(x).toLocaleString()
+      },
+      align: {Rank: "right", SOS: "right", "PCI (std)": "right", RCA: "right", "Trade (USD)": "right"},
+      rows: 20
+    })
+```
+
+## Diversification opportunities
+
+::: {.sos-caption}
+Products with high proximity (density) to the country's existing export basket and meaningful complexity, where RCA is currently below 1. Higher diversification score = better-feasibility upgrades.
+:::
+
+```{ojs}
+//| echo: false
+divRows = divAll
+  .filter(r => r.iso3 === country.iso3)
+  .sort((a, b) => (a.rank_within_country || 999) - (b.rank_within_country || 999))
+  .map(r => ({
+    Rank: r.rank_within_country,
+    HS: r.hs4,
+    Product: r.product_name,
+    Density: r.density,
+    "PCI (std)": r.pci_std,
+    RCA: r.rca,
+    "Diversification score": r.diversification_score
+  }))
+```
+
+```{ojs}
+//| echo: false
+divRows.length === 0
+  ? htl.html`<div class="sos-caption">No diversification-opportunity data available for ${country.iso3}.</div>`
+  : Inputs.table(divRows, {
+      format: {
+        "Density":   x => x == null ? "—" : x.toFixed(3),
+        "PCI (std)": x => x == null ? "—" : x.toFixed(2),
+        "RCA":       x => x == null ? "—" : x.toFixed(2),
+        "Diversification score": x => x == null ? "—" : x.toFixed(3)
+      },
+      align: {Rank: "right", Density: "right", "PCI (std)": "right", RCA: "right", "Diversification score": "right"},
+      rows: 20
+    })
+```
+
+## Top-5 derisked corridors
+
+::: {.sos-caption}
+Bilateral partners contributing most to the country's SOS via the FDI-derisked channel. _Derisked_ flags corridors where bilateral FDI fell more than 50% from its 2015–2017 baseline.
+:::
+
+```{ojs}
+//| echo: false
+corRows = corAll
+  .filter(r => r.iso3 === country.iso3)
+  .sort((a, b) => (a.rank_within_country || 999) - (b.rank_within_country || 999))
+  .slice(0, 5)
+
+corridorBars(Plot, corRows, {height: 280})
+```
+
+::: {.sos-caption style="margin-top: 2.5rem;"}
+[← Back to all countries](index.qmd) · [Methodology](method.qmd) · [Data](data.qmd)
+:::

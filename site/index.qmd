@@ -1,0 +1,114 @@
+---
+title: "The Stablecoin Opportunity Map"
+subtitle: "Where would alternative payment infrastructure unlock the most economically valuable trade?"
+pagetitle: "Stablecoin Opportunity Map — Home"
+description-meta: "An interactive companion site to the working paper: country-level Stablecoin Opportunity Scores from the FATF / FDI / AMLD natural-experiment design."
+---
+
+::: {.sos-disclaimer}
+**Preliminary analysis using publicly available data.** Trade flows from BACI; complexity from the Harvard Growth Lab; de-risking from IMF bilateral FDI; FATF greylist and EU AMLD timing from public sources. See the [Methodology](method.qmd) and [Data](data.qmd) pages for limitations.
+:::
+
+```{ojs}
+//| echo: false
+import {choropleth, quadrantScatter} from "./_ojs/charts.js";
+import {countryHref} from "./_ojs/router.js";
+import {fmt2} from "./_ojs/format.js";
+Plot = require("@observablehq/plot@0.6")
+d3   = require("d3@7")
+htl  = require("htl@0.3")
+topojson = require("topojson-client@3")
+```
+
+```{ojs}
+//| echo: false
+sos = await FileAttachment("_data/sos_country.json").json()
+sosByIso3 = new Map(sos.map(d => [d.iso3, d]))
+worldWithIso3 = await FileAttachment("_data/world.geojson").json()
+```
+
+## Composite SOS across the world
+
+::: {.sos-caption}
+Higher values flag countries where complex-goods trade is most exposed to correspondent-banking frictions. Hover for country, score, and rank.
+:::
+
+```{ojs}
+//| echo: false
+choropleth(Plot, worldWithIso3, sosByIso3, {height: 480})
+```
+
+## Top 20 by composite SOS
+
+::: {.sos-caption}
+Click a country in the table or use the selector below to open its country page.
+:::
+
+```{ojs}
+//| echo: false
+top20 = sos
+  .filter(d => d.sos_composite != null && d.rank_composite != null)
+  .sort((a, b) => a.rank_composite - b.rank_composite)
+  .slice(0, 20)
+  .map(d => ({
+    Rank: d.rank_composite,
+    Country: d.name,
+    ISO3: d.iso3,
+    "Composite SOS": +d.sos_composite,
+    FATF:  d.sos_fatf  != null ? +d.sos_fatf  : null,
+    FDI:   d.sos_fdi   != null ? +d.sos_fdi   : null,
+    AMLD:  d.sos_amld  != null ? +d.sos_amld  : null,
+    "Quadrant": d.quadrant_label || ""
+  }))
+
+Inputs.table(top20, {
+  format: {
+    "Composite SOS": x => x == null ? "—" : x.toFixed(2),
+    "FATF":  x => x == null ? "—" : x.toFixed(2),
+    "FDI":   x => x == null ? "—" : x.toFixed(2),
+    "AMLD":  x => x == null ? "—" : x.toFixed(2),
+    "Rank":  x => x == null ? "—" : Math.round(x)
+  },
+  align: {Rank: "right", "Composite SOS": "right", FATF: "right", FDI: "right", AMLD: "right"},
+  rows: 20
+})
+```
+
+## Open a country
+
+```{ojs}
+//| echo: false
+viewof picked = Inputs.select(
+  sos.slice().sort((a, b) => (a.name || "").localeCompare(b.name || "")),
+  {label: "Country", format: x => `${x.name} (${x.iso3})`, value: sos.find(d => d.iso3 === "HTI") || sos[0]}
+)
+```
+
+```{ojs}
+//| echo: false
+{
+  if (!picked || !picked.iso3) return htl.html`<div class="sos-caption">Pick a country to open its profile.</div>`;
+  const url = countryHref(picked.iso3);
+  return htl.html`<div class="sos-caption">
+    Open <a href="${url}"><strong>${picked.name}</strong> (${picked.iso3})</a>
+    or pick another country above.
+  </div>`;
+}
+```
+
+## Feasibility quadrant
+
+::: {.sos-caption}
+Capital openness (Chinn-Ito) on x; infrastructure / GDP-per-capita score on y; bubble size and color = composite SOS. Q1 (top-right) flags actionable-now jurisdictions; Q4 (bottom-left) is structurally blocked.
+:::
+
+```{ojs}
+//| echo: false
+quadrantScatter(Plot, sos, {height: 460})
+```
+
+## How to read this
+
+- **Composite SOS** rolls up three independent natural experiments — FATF greylisting, FDI-derisked corridors, and EU AMLD harmonization — into a single country-level score. Higher = more exposure to correspondent-banking frictions on complex-goods trade.
+- **Three components** (FATF / FDI / AMLD) decompose the headline score and identify which channel dominates for each country.
+- **Quadrants** combine the SOS with two readiness dimensions (capital openness × infrastructure) so an analyst can separate _high-need_ from _actionable-now_ jurisdictions.

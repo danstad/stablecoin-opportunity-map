@@ -1,0 +1,8 @@
+Variable,trade_value,fdi_proxy,pf_rpw,pci_std,eci_o,ln_dist,kaopen_bilateral
+trade_value,1,-0.067,-0.006,0.007,0.02,-0.019,
+fdi_proxy,-0.067,1,0.114,0,-0.206,0.315,
+pf_rpw,-0.006,0.114,1,0,-0.024,-0.158,
+pci_std,0.007,0,0,1,0,0,
+eci_o,0.02,-0.206,-0.024,0,1,-0.006,
+ln_dist,-0.019,0.315,-0.158,0,-0.006,1,
+kaopen_bilateral,,,,,,,

@@ -1,0 +1,12 @@
+Dimension,Count
+Total observations,"33,317,360"
+Positive trade flows,"8,925,604"
+Zero trade flows,"24,391,756"
+Exporters,226
+Importers,226
+Country pairs,35444
+Products (HS4),94
+Years,10
+Obs with PCI,"33,317,360"
+Obs with PF_CBR,"18,753,940"
+Obs with gravity,"32,743,020"

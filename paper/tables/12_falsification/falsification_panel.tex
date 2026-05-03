@@ -1,0 +1,25 @@
+\begin{tabular}{lcccccc}
+\toprule
+ & (1) & (2) & (3) & (4) & (5) & (6) \\
+ & Baseline & + Distance & + Language & + Contiguity & + Colony & + RTA \\
+\midrule
+Derisked $\times$ PCI & -0.1976$^{***}$ & -0.2000$^{***}$ & -0.2049$^{***}$ & -0.1991$^{***}$ & -0.2013$^{***}$ & -0.1863$^{***}$ \\
+ & (0.0607) & (0.0565) & (0.0597) & (0.0606) & (0.0610) & (0.0633) \\
+\midrule
+$\ln(\text{dist}) \times \text{PCI}$ & -- & 0.0061 & -- & -- & -- & -- \\
+ & -- & (0.0438) & -- & -- & -- & -- \\
+Common language $\times$ PCI & -- & -- & -0.0800 & -- & -- & -- \\
+ & -- & -- & (0.1590) & -- & -- & -- \\
+Contiguity $\times$ PCI & -- & -- & -- & -0.1486$^{**}$ & -- & -- \\
+ & -- & -- & -- & (0.0587) & -- & -- \\
+Colony $\times$ PCI & -- & -- & -- & -- & -0.2128$^{***}$ & -- \\
+ & -- & -- & -- & -- & (0.0782) & -- \\
+RTA $\times$ PCI & -- & -- & -- & -- & -- & 0.0575 \\
+ & -- & -- & -- & -- & -- & (0.0483) \\
+\midrule
+Observations & 1,684,198 & 1,684,198 & 1,649,700 & 1,684,198 & 1,649,700 & 1,684,198 \\
+Pair $\times$ year FE & Yes & Yes & Yes & Yes & Yes & Yes \\
+Exporter-year, Importer-year FE & Yes & Yes & Yes & Yes & Yes & Yes \\
+Product (HS4) FE & Yes & Yes & Yes & Yes & Yes & Yes \\
+\bottomrule
+\end{tabular}

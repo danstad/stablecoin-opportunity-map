@@ -1,0 +1,156 @@
+/* Stablecoin Opportunity Map — site theme.
+   Serif typography to match the working paper; viridis chart palette is
+   applied at the chart level (see _ojs/palette.js). */
+
+:root {
+  --sos-serif: 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --sos-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sos-text: #1a1a1a;
+  --sos-muted: #666;
+  --sos-accent: #2c3e50;
+  --sos-card-bg: #ffffff;
+  --sos-card-border: #e6e6e6;
+  --sos-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --color-fatf: #FC8D62;
+  --color-fdi: #8DA0CB;
+  --color-amld: #66C2A5;
+}
+
+body {
+  font-family: var(--sos-serif);
+  color: var(--sos-text);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sos-serif);
+  font-weight: 600;
+  color: var(--sos-accent);
+}
+
+h1 { font-size: 2.0rem; margin-bottom: 0.4rem; }
+h2 { font-size: 1.5rem; margin-top: 2.2rem; margin-bottom: 0.6rem; }
+h3 { font-size: 1.2rem; margin-top: 1.6rem; }
+
+.navbar { font-family: var(--sos-sans); }
+.navbar-brand { font-family: var(--sos-serif); font-weight: 700; }
+
+/* Disclaimer banner */
+.sos-disclaimer {
+  background: #fff8e6;
+  border-left: 4px solid #d6a700;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0 1.5rem 0;
+  font-size: 0.92rem;
+  color: #5b4500;
+  border-radius: 4px;
+}
+
+/* KPI cards */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem 0;
+}
+.kpi-card {
+  background: var(--sos-card-bg);
+  border: 1px solid var(--sos-card-border);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  box-shadow: var(--sos-shadow);
+}
+.kpi-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--sos-muted);
+  margin-bottom: 0.3rem;
+  font-family: var(--sos-sans);
+  font-weight: 600;
+}
+.kpi-value {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--sos-text);
+  line-height: 1.1;
+}
+.kpi-sub {
+  font-size: 0.8rem;
+  color: var(--sos-muted);
+  margin-top: 0.25rem;
+}
+
+/* Country header row */
+.country-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem 0;
+}
+.country-name {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--sos-accent);
+}
+.country-iso {
+  font-size: 1.1rem;
+  color: var(--sos-muted);
+  font-weight: 500;
+}
+
+/* Quadrant chips */
+.quadrant-chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 14px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: var(--sos-sans);
+}
+.quadrant-Q1 { background: #2ca02c; }
+.quadrant-Q2 { background: #ff7f0e; }
+.quadrant-Q3 { background: #1f77b4; }
+.quadrant-Q4 { background: #d62728; }
+.quadrant-other { background: #7f7f7f; }
+
+/* Charts and tables breathing room */
+.ojs-output { margin: 0.5rem 0 1.4rem 0; }
+.ojs-output svg { max-width: 100%; height: auto; }
+
+/* Inputs.table styling tweaks */
+form[role="form"] input[type="search"] {
+  font-family: var(--sos-sans);
+}
+
+/* Caption-style helper text */
+.sos-caption {
+  font-size: 0.92rem;
+  color: var(--sos-muted);
+  font-style: italic;
+  margin: 0 0 0.8rem 0;
+}
+
+/* Footer */
+.nav-footer {
+  font-family: var(--sos-sans);
+  font-size: 0.85rem;
+  color: var(--sos-muted);
+}
+
+/* Treemap tooltip */
+.treemap-tooltip {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--sos-card-border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-family: var(--sos-sans);
+  font-size: 0.82rem;
+  pointer-events: none;
+  box-shadow: var(--sos-shadow);
+  max-width: 280px;
+}

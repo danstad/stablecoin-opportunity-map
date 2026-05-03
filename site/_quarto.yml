@@ -1,0 +1,47 @@
+project:
+  type: website
+  output-dir: ../docs
+  resources:
+    - "_data/**"
+    - "_ojs/**"
+    - "assets/**"
+
+website:
+  title: "The Stablecoin Opportunity Map"
+  description: "Where would alternative payment infrastructure unlock the most economically valuable trade?"
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: Home
+      - href: country.qmd
+        text: Countries
+      - href: method.qmd
+        text: Methodology
+      - href: data.qmd
+        text: Data
+      - href: about.qmd
+        text: About
+    right:
+      - icon: file-pdf
+        href: assets/paper.pdf
+        text: Paper
+  page-footer:
+    left: "Preliminary analysis using publicly available data."
+    right: "Daniel Prudencio · Built with Claude Code"
+  open-graph: true
+  twitter-card: true
+
+format:
+  html:
+    theme: cosmo
+    css: assets/custom.css
+    toc: false
+    page-layout: full
+    fontsize: 1.0em
+    include-in-header:
+      - text: |
+          <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
