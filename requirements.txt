@@ -1,0 +1,8 @@
+# Requirements for the Streamlit MVP at apps/streamlit_sos/app.py
+# Streamlit Community Cloud reads this file from the repo root.
+streamlit>=1.57,<2.0
+plotly>=6.0,<7.0
+pandas>=2.2,<3.0
+pyarrow>=18.0
+pycountry>=26.0
+numpy>=2.0,<3.0
