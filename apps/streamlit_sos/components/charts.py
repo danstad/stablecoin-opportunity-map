@@ -39,10 +39,12 @@ def _base_layout(fig: go.Figure, height: int = 500) -> go.Figure:
     fig.update_xaxes(
         title_font=dict(size=16),
         tickfont=dict(size=14),
+        automargin=True,
     )
     fig.update_yaxes(
         title_font=dict(size=16),
         tickfont=dict(size=14),
+        automargin=True,
     )
     return fig
 
@@ -155,9 +157,9 @@ def three_pronged_bars(
     alongside the sample median. Three groups (one per channel), two bars.
     """
     components = [
-        ("FATF (greylist)", "sos_fatf", COLOR_FATF),
-        ("FDI (derisked)", "sos_fdi", COLOR_FDI),
-        ("AMLD (EU harmon.)", "sos_amld", COLOR_AMLD),
+        ("FATF", "sos_fatf", COLOR_FATF),
+        ("FDI", "sos_fdi", COLOR_FDI),
+        ("AMLD", "sos_amld", COLOR_AMLD),
     ]
     rows = []
     for label, col, _color in components:
