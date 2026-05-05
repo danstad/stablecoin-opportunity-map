@@ -21,14 +21,28 @@ from .theme import (
 
 
 def _base_layout(fig: go.Figure, height: int = 500) -> go.Figure:
-    """Shared layout: white bg, serif-leaning font, no title."""
+    """Shared layout: white bg, serif-leaning font, no title.
+
+    Font sizes calibrated for the Streamlit app at typical viewport widths:
+    16pt body / 16pt axis titles / 14pt ticks / 14pt legend / 15pt hover.
+    """
     fig.update_layout(
         height=height,
         title=None,
         paper_bgcolor="white",
         plot_bgcolor="white",
-        font=dict(family="Georgia, 'Times New Roman', serif", size=13),
-        margin=dict(l=10, r=10, t=30, b=10),
+        font=dict(family="Georgia, 'Times New Roman', serif", size=16),
+        margin=dict(l=20, r=20, t=40, b=20),
+        legend=dict(font=dict(size=14)),
+        hoverlabel=dict(font=dict(size=15, family="Georgia, 'Times New Roman', serif")),
+    )
+    fig.update_xaxes(
+        title_font=dict(size=16),
+        tickfont=dict(size=14),
+    )
+    fig.update_yaxes(
+        title_font=dict(size=16),
+        tickfont=dict(size=14),
     )
     return fig
 
@@ -76,7 +90,12 @@ def world_choropleth(
         showframe=False,
     )
     fig.update_layout(
-        coloraxis_colorbar=dict(title="Composite SOS", thickness=12, len=0.7),
+        coloraxis_colorbar=dict(
+            title=dict(text="Composite SOS", font=dict(size=15)),
+            thickness=14,
+            len=0.7,
+            tickfont=dict(size=13),
+        ),
     )
     return _base_layout(fig, height=height)
 
@@ -167,7 +186,7 @@ def three_pronged_bars(
     )
     fig.update_xaxes(showgrid=True, gridcolor="#eeeeee", zeroline=True,
                      zerolinecolor="#888888")
-    return _base_layout(fig, height=320)
+    return _base_layout(fig, height=380)
 
 
 def product_treemap(df_country: pd.DataFrame, top_n: int = 50) -> go.Figure:
@@ -234,10 +253,16 @@ def product_treemap(df_country: pd.DataFrame, top_n: int = 50) -> go.Figure:
     )
     fig.update_traces(
         textinfo="label+value",
-        textfont=dict(family="Georgia, 'Times New Roman', serif", size=12),
+        textfont=dict(family="Georgia, 'Times New Roman', serif", size=15),
         marker=dict(cornerradius=2),
     )
-    return _base_layout(fig, height=520)
+    fig.update_layout(
+        coloraxis_colorbar=dict(
+            title=dict(text="Composite SOS", font=dict(size=15)),
+            tickfont=dict(size=13),
+        ),
+    )
+    return _base_layout(fig, height=560)
 
 
 def corridor_bars(df: pd.DataFrame) -> go.Figure:
@@ -279,7 +304,7 @@ def corridor_bars(df: pd.DataFrame) -> go.Figure:
         legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="right", x=1.0),
     )
     fig.update_xaxes(showgrid=True, gridcolor="#eeeeee")
-    return _base_layout(fig, height=300)
+    return _base_layout(fig, height=360)
 
 
 # --- helpers -----------------------------------------------------------------
